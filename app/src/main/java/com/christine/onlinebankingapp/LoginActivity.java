@@ -4,18 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.inputmethod.CorrectionInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
 import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+import static android.view.View.VISIBLE;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,6 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     EditText UsernameEditText;
     EditText PasswordEditText;
     Button LoginButton;
+    TextView IncorrectUsernameTextView;
+    TextView IncorrectPasswordTextView;
+
+    MediaPlayer incorrectLoginMediaPlayer;
+    MediaPlayer correctLoginMediaPlayer;
+
+    boolean usernameIsCorrect = false;
+    boolean passwordIsCorrect = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         this.UsernameEditText = findViewById(R.id.et_username);
         this.PasswordEditText = findViewById(R.id.et_password);
         this.LoginButton = findViewById(R.id.btn_login);
+        this.incorrectLoginMediaPlayer = MediaPlayer.create(this, R.raw.incorrect_login);
+        this.correctLoginMediaPlayer = MediaPlayer.create(this, R.raw.correct_login);
+        this.IncorrectPasswordTextView = findViewById(R.id.tv_incorrect_password);
+        this.IncorrectUsernameTextView = findViewById(R.id.tv_incorrect_username);
 
     }
 
@@ -64,8 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onPressLoginButton(View view) {
-        boolean usernameIsCorrect = false;
-        boolean passwordIsCorrect = false;
+
         String usernameEntered = UsernameEditText.getText().toString().toLowerCase();
 
         String passwordEntered = PasswordEditText.getText().toString().toLowerCase();
@@ -85,8 +103,68 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if(usernameIsCorrect&&passwordIsCorrect){
+            clearEditTexts();
+            correctLoginMediaPlayer.start();
             Intent i = new Intent(LoginActivity.this, SuccessfulLoginActivity.class);
             LoginActivity.this.startActivity(i);
         }
+        else{
+            incorrectLoginMediaPlayer.start();
+
+
+            Animation anim = new AlphaAnimation(0.0f, 1.0f);
+            anim.setDuration(150); //You can manage the time of the blink with this parameter
+            anim.setStartOffset(20);
+            anim.setRepeatCount(17);
+            final boolean finalPasswordIsCorrect = passwordIsCorrect;
+            anim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    if(!passwordIsCorrect){
+                        PasswordEditText.setText("");
+                    }
+                    if (!usernameIsCorrect) {
+                        UsernameEditText.setText("");
+                    }
+                    PasswordEditText.setTextColor(Color.parseColor("#ffffff"));
+                    UsernameEditText.setTextColor(Color.parseColor("#ffffff"));
+                    setRedMessageVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            if(!passwordIsCorrect){
+                PasswordEditText.setTextColor(Color.parseColor("#ff0000"));
+                IncorrectPasswordTextView.setVisibility(VISIBLE);
+                IncorrectPasswordTextView.startAnimation(anim);
+                PasswordEditText.startAnimation(anim);
+            }
+            if(!usernameIsCorrect) {
+                UsernameEditText.setTextColor(Color.parseColor("#ff0000"));
+                IncorrectUsernameTextView.setVisibility(View.INVISIBLE);
+                UsernameEditText.startAnimation(anim);
+                IncorrectUsernameTextView.startAnimation(anim);
+            }
+        }
     }
+
+    void clearEditTexts(){
+        PasswordEditText.setText("");
+        UsernameEditText.setText("");
+    }
+
+    //pass in VISIBLE or INVISIBLE to make them visible or not
+    void setRedMessageVisibility(int visib){
+        IncorrectUsernameTextView.setVisibility(visib);
+        IncorrectPasswordTextView.setVisibility(visib);
+    }
+
 }
