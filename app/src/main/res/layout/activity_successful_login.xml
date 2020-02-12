@@ -20,21 +20,61 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="272dp"
-        android:text="1,000,000"
+        android:text="42,472,563.55"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="768dp"
         android:layout_marginTop="272dp"
-        android:text="1,000,000"
+        android:text="$77,172,647.97"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="772dp"
+        android:layout_marginTop="412dp"
+        android:text="76,158,178,7076"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="776dp"
+        android:layout_marginTop="548dp"
+        android:text="83,998,057.00"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="772dp"
+        android:layout_marginTop="692dp"
+        android:text="$82,190,920.18"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="408dp"
-        android:text="1,000,000"
+        android:text="73,582,781.36"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginBottom="216dp"
-        android:text="1,000,000"
+        android:text="66,877,433.92"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +161,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="92dp"
         android:layout_marginBottom="68dp"
-        android:text="1,000,000"
+        android:text="99,988,953.99"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +189,7 @@
         android:layout_marginEnd="84dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/league_spartan_bold"
-        android:onClick="onClickLogOut"
+        android:onClick="onClickCheckBalance"
         android:text="Check Balance in $"
         android:textColor="@color/sixthStreetBankPurple"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +203,7 @@
         android:layout_marginEnd="80dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/league_spartan_bold"
-        android:onClick="onClickLogOut"
+        android:onClick="onClickCheckBalance"
         android:text="Check Balance in $"
         android:textColor="@color/sixthStreetBankPurple"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +217,7 @@
         android:layout_marginEnd="80dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/league_spartan_bold"
-        android:onClick="onClickLogOut"
+        android:onClick="onClickCheckBalance"
         android:text="Check Balance in $"
         android:textColor="@color/sixthStreetBankPurple"
         app:layout_constraintEnd_toEndOf="parent"
@@ -191,14 +231,14 @@
         android:layout_marginEnd="76dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/league_spartan_bold"
-        android:onClick="onClickLogOut"
+        android:onClick="onClickCheckBalance"
         android:text="Check Balance in $"
         android:textColor="@color/sixthStreetBankPurple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_number_euros"
+        android:id="@+id/et_number1"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textSize="26sp"
@@ -209,6 +249,51 @@
         android:layout_height="40dp"
         android:layout_marginStart="508dp"
         android:layout_marginTop="272dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_number2"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="508dp"
+        android:layout_marginTop="408dp"
+        android:background="@color/white"
+        android:isScrollContainer="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/sixthStreetBankPurple"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_number3"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="508dp"
+        android:layout_marginTop="544dp"
+        android:background="@color/white"
+        android:isScrollContainer="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/sixthStreetBankPurple"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_number4"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="508dp"
+        android:layout_marginTop="692dp"
+        android:background="@color/white"
+        android:isScrollContainer="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/sixthStreetBankPurple"
+        android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

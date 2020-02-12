@@ -10,6 +10,7 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.inputmethod.CorrectionInfo;
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(SYSTEM_UI_FLAG_IMMERSIVE_STICKY|SYSTEM_UI_FLAG_FULLSCREEN|SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onStart();
     }
 
@@ -84,9 +86,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onPressLoginButton(View view) {
 
-        String usernameEntered = UsernameEditText.getText().toString().toLowerCase();
+        String usernameEntered = UsernameEditText.getText().toString().toLowerCase().trim();
 
-        String passwordEntered = PasswordEditText.getText().toString().toLowerCase();
+        String passwordEntered = PasswordEditText.getText().toString().toLowerCase().trim();
 
 
         if(!usernameEntered.equals(this.correctUsername)){
